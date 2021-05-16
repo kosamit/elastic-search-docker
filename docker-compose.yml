@@ -1,12 +1,16 @@
 version: '3'
 
+volumes:
+  es-data:
+    driver: local
+
 services:
   elasticsearch:
     build:
       context: .
       dockerfile: ./elasticsearch/Dockerfile
     volumes:
-      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - es-data:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
       - cluster.name=docker-cluster
